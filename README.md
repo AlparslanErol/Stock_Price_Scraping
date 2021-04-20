@@ -4,7 +4,7 @@
 
 
 ### Virtual Environment with Project Requirements
-> ``Python 3.9.0`` was used to develop for the homework assignments.\
+> ``Python 3.7.6`` was used to develop for the homework assignments.\
 > You can find the required python packages and their versions in ``requirements.txt`` file.\
 > Thanks to ``Makefile``, you can create a virtual environment, install required packages and delete virtual environment.
 > If you do not want to use virtual environment, then you need to install required packages in your base python interpreter.
