@@ -1,11 +1,11 @@
 venv:
-	python3 -m pip install --upgrade pip
-	python3 -m pip install virtualenv
-	python3 -m venv venv
+	python -m pip install --user --upgrade pip
+	python -m pip install --user virtualenv
+	python -m venv venv
 
 require:
-	python3 -m pip install --upgrade pip
-	python3 -m pip install -r requirements.txt
+	python -m pip install --upgrade pip
+	python -m pip install -r requirements.txt
 
 clean:
 	rm -r venv

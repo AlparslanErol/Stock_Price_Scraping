@@ -82,4 +82,4 @@ data_frame = pd.DataFrame({"Symbols": symbols, "Names": names, "Previous Close":
  			"Ex-Dividend Date": Ex_Dividend_Date, "1y Target Est": _1y_target_Est})
 
 # save the data in data_frame into a csv file named "stocks_new.csv"
-data_frame.to_csv('stocks_new.csv', mode = 'a', header = True)
+data_frame.to_csv('stocks_bs.csv', mode = 'a', header = True)

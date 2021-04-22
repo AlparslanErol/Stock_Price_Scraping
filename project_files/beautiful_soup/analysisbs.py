@@ -4,7 +4,7 @@ import pandas as pd
 # import numpy
 
 
-data = pd.read_csv("~/Desktop/Stock_Price_Scraping/stocks_new.csv") 
+data = pd.read_csv("~/Desktop/Stock_Price_Scraping/stocks_bs.csv") 
 # print(data.head())
 
 # fig = plt.figure()
