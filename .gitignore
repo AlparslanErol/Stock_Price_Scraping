@@ -1,6 +1,6 @@
 .gitmessage
 venv/
 .idea
-*.csv
 geckodriver.log
 special.txt
+__pycache__
