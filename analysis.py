@@ -4,7 +4,7 @@ import pandas as pd
 # import numpy
 
 
-data = pd.read_csv("~/Desktop/Stock_Price_Scraping/stocks.csv") 
+data = pd.read_csv("~/Desktop/Stock_Price_Scraping/stocks_new.csv") 
 # print(data.head())
 
 # fig = plt.figure()
@@ -60,9 +60,11 @@ data = pd.read_csv("~/Desktop/Stock_Price_Scraping/stocks.csv")
 # plt.show() 
 
 
-data1 = data.sort_values("Price")
-data2 = data.sort_values("Change")
+data1 = data.sort_values("Previous Close")
+data2 = data.sort_values("Open")
 
 ax1 = plt.subplot(311)
-data1.plot(x ='Symbols', y=['Price'], kind = 'bar')
-plt.show(block=True) 
+data1.plot(x ='Symbols', y=['Previous Close'], kind = 'bar')
+plt.show(block=True)
+data2.plot(x ='Symbols', y=['Open'], kind = 'bar')
+plt.show(block=True)
