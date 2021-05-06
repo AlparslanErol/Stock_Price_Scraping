@@ -2,6 +2,7 @@
 import scrapy
 import re
 
+
 class Stock(scrapy.Item):
     name = scrapy.Field()
     short_name = scrapy.Field()
@@ -22,11 +23,11 @@ class Stock(scrapy.Item):
     ex_dividend_date = scrapy.Field()
     one_y_target_est = scrapy.Field()
 
+
 class LinksSpider(scrapy.Spider):
     name = 'stocks'
     allowed_domains = ['https://finance.yahoo.com/']
     custom_settings = {
-            'FEED_URI': 'stocks.csv',
             'FEED_FORMAT': 'csv',
             'FEED_EXPORT_FIELDS': [
                 "name",
@@ -50,10 +51,11 @@ class LinksSpider(scrapy.Spider):
             ],
          }
     try:
-        with open("link_list.csv", "rt") as f:
+        with open("link_lists.csv", "rt") as f:
             start_urls = [url.strip() for url in f.readlines()][1:]
     except:
         start_urls = []
+
     def parse(self, response):
         s = Stock()
         temp = "//td[@class='Ta(end) Fw(600) Lh(14px)']/span/text()"
