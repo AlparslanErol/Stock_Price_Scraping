@@ -1,27 +1,65 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Created on 3.05.2021 - 18:33
+
+@author: Tesfahun Tegene Boshe
+"""
+"""
+- import the necessary libraries
+- matplotlib for plotting and 
+- pandas for handling the dataframe
+"""
 import matplotlib.pyplot as plt
 import pandas as pd
 
 # load the data from the csv file. 
-data = pd.read_csv("output_fixtures/beautiful_soup/stocks_bs.csv")
+# This is the output file after running bs.py
 
-# select numeric variables for plotting
-data = data.iloc[0:5, ]  # select the top 5 rows for readability.
-data1 = data["Previous Close"].to_list()  # change the dataframe columns to lists
+# put the correct url
+data = pd.read_csv("stocks_bs.csv") 
+
+"""
+- The aim here is to demonestrate that the data scraped can be useful for further steps
+- select the top 5 rows for readability of the graphs.
+- selecting numeric variables for plotting
+- convert each column to a list
+"""
+
+data = data.iloc[0:5, ]
+
+data1 = data["Previous Close"].to_list()
 data2 = data["Open"].to_list()
 data3 = data["PE Ratio (TTM)"].to_list()
 data4 = data["EPS (TTM)"].to_list()
+
+# close all plots currently open
 plt.close("all")
 
-year = data["Symbols"].to_list()
+# symbols will be on the x-axis. 
+symbol = data["Symbols"].to_list()
 
-fig, ax = plt.subplots(4, 1, figsize=(10, 8))  # the title on top
+# 4 subplots with size 10X8
+fig, ax = plt.subplots(4, 1, figsize=(10, 8))
+
+# the title on top
 fig.suptitle('Stock market analysis', fontsize=16)
-ax[0].bar(year, data1, color="red")
+
+# bar graph 1
+ax[0].bar(symbol, data1, color="red")
 ax[0].legend(["Previous Close"])
-ax[1].bar(year, data2, color="yellow")
+
+# bar graph 2
+ax[1].bar(symbol, data2, color="yellow")
 ax[1].legend(["Open"])
-ax[2].bar(year, data3, color="green")
+
+# bar graph 3
+ax[2].bar(symbol, data3, color="green")
 ax[2].legend(["PE Ratio (TTM)"])
-ax[3].bar(year, data4, color="green")
+
+# bar graph 4
+ax[3].bar(symbol, data4, color="green")
 ax[3].legend(["EPS (TTM)"])
+
+# show the plot
 plt.show()
