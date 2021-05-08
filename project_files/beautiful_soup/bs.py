@@ -70,13 +70,13 @@ for link in links:
     r = requests.get(link)
     html = r.text
     parsed = BeautifulSoup(html, 'html.parser')
-    
+
     """
     The columns of the table for every link opened are divided into two separate tables
     - Table 1 has attributes like 'Previous_Close', 'Open','Ask'
     - Table 2 has attributes like 'Market_Cap', 'Beta_5Y_Monthly','PE_Ratio_TTM'
     """
-	    
+
     # the first table
     soup = parsed.find_all('table', )[0]
 
@@ -88,7 +88,7 @@ for link in links:
     _52_Week_Range.append(soup.find_all('td', attrs={'data-test': 'FIFTY_TWO_WK_RANGE-value'})[0].text)
     Volume.append(soup.find_all('td', attrs={'data-test': 'TD_VOLUME-value'})[0].text)
     Avg_Volume.append(soup.find_all('td', attrs={'data-test': 'AVERAGE_VOLUME_3MONTH-value'})[0].text)
-    
+
     # the second table
     soup = parsed.find_all('table', )[1]
 
@@ -110,11 +110,11 @@ data_frame = pd.DataFrame({"Symbols": symbols, "Names": names, "Previous Close":
                            "Beta (5Y Monthly)": Beta_5Y_Monthly, "PE Ratio (TTM)": PE_Ratio_TTM, "EPS (TTM)": EPS_TTM,
                            "Earnings Date": Earnings_Date, "Forward Dividend & Yield": Forward_Dividend_Yield,
                            "Ex-Dividend Date": Ex_Dividend_Date, "1y Target Est": _1y_target_Est})
-                           
+
 # print to the terminal
 print(data_frame)
 
 # save the data in data_frame into a csv file named "stocks_new.csv"
 # a csv file with name "stocks_new.csv" will be created on the working directory.
- 
+
 data_frame.to_csv('stocks_bs.csv', mode='a', header=True, index=False)
