@@ -29,7 +29,6 @@ class LinksSpider(scrapy.Spider):
     name = 'stocks'
     allowed_domains = ['https://finance.yahoo.com/']
     custom_settings = {
-            'FEED_URI': 'stocks.csv',
             'FEED_FORMAT': 'csv',
             'FEED_EXPORT_FIELDS': [
                 "name",

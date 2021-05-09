@@ -5,3 +5,4 @@ geckodriver.log
 special.txt
 __pycache__
 project_files/scrapy/project/
+analysisbs.py

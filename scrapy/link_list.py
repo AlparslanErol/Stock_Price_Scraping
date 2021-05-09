@@ -7,7 +7,7 @@ class Link(scrapy.Item):
 
 #Creating a spider to scrap links for each company from most actives
 class LinkListsSpider(scrapy.Spider):
-    name = 'link_lists'
+    name = 'link_list'
     allowed_domains = ['https://finance.yahoo.com/']
     start_urls = ['https://finance.yahoo.com/most-active']
 

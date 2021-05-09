@@ -32,15 +32,43 @@ The variables such as ``Previous Close``, ``Open``, etc are distributed among tw
 Within their respective tables, every variable is specified by ``data-test`` attribute,
 allowing us to specify and extract a variable of interest one at a time.\ 
 The extracted values are appended to already created lists, finally making up a dataframe with the variable names
-as column headers and the values as a column vector. The dataframe is exported to the ``csv`` file **stocks_bs.csv**. 
+as column headers and the values as a column vector. The dataframe is exported to the ``csv`` file **stocks_bs.csv**.
+
+> To run the ``bs.py`` file on the command line, use the command
+```bash
+# for python3 users
+…. : ~<project_root>$ python3 bs.py 
+# for python2 users
+…. : ~<project_root>$ python bs.py 
+```
+You may as well run the file using your favorite python IDE.
 
 ## Scrapy
-For the puropse of scraping Yahoo Finance web page, we also used Scrapy framework. The process could be divided into two parts: first - scraping the links for each of the "Most Active" companies and the second - scraping data for each of the companies.
+For the purpose of scraping Yahoo Finance web page, we also used Scrapy framework. The process could be divided
+into two parts:\
+1.Scraping the links for each of the ``Most Active`` companies,
+2.Scraping data for each of the companies.
 
-Links creation happens similarily to the Beautiful Soup and Selenium part of the project. The links are created by adding to a base link the ending specified for each company. To extract them, we used selectors, specifically Xpaths. 
-The scrapping happens with the use of spiders, first spider is created for the purpose of extracting the links and the second one to get the data dor each company. Spiders are basically a programs downloading the content of a given pages, they are using a parse function which is called when the URL is crawled and it includes the extraction logic. As not all the information about the companies could be extracted using the same xpath, we used two diffrent xpaths.
+Links creation happens similarity to the Beautiful Soup and Selenium part of the project.
+The links are created by adding to a base link the ending specified for each company.
+To extract them, we used selectors, specifically XPATH.\ 
+The scrapping happens with the use of spiders, ``first spider`` is created for the purpose of extracting the links,
+and the ``second one`` to get the data dor each company.
+Spiders are basically a programs downloading the content of a given pages, they are using a parse function
+which is called when the URL is crawled and it includes the extraction logic.
+As not all the information about the companies could be extracted using the same xpath, we used two diffrent xpaths.
 
-The data in our project is stored in a csv files. This is specified by the FEED_FORMAT = 'csv'. What is important to note is that, to run the spiders, a USER_AGENT = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://google.com/bot.html)' has to be used.
+The data in our project is stored in a ``csv`` files. This is specified by the FEED_FORMAT = 'csv'.
+What is important to note is that, to run the spiders,\
+> USER_AGENT = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://google.com/bot.html)' has to be used in ``settings.py`` file.
+
+To run the code provided please follow steps below:
+1. In the terminal write: “ scrapy start project Scraping_Stock_Prices (the name can be different)”
+2. Paste spiders provided into the spiders folder created by scrapy.
+3. In the file “settings.py” change the USER AGENT.
+4. In the terminal execute the command: scrapy crawl link_lists -o link_list.csv.
+5. Then execute: scrapy crawl stocks -o stocks.csv
+6. Take a look at the stocks.csv if the data is scrapped.
 
 ## Selenium
 For selenium scraper, a driver for ``Mozilla Firefox`` was used. Python script is using **command line arguments**
@@ -110,11 +138,11 @@ project goal that ``All scrapers should scrape the same information from the dom
 # Elementary Data Analysis
 Aim of this elementary data analysis is to show collected data can be used for further
 analysis, but nothing more detailed.\
-The ``analysisbs.py`` file presents the bar graphs for 4 of the numerical columns.
 The number of companies is limited to 5 for clearer presentation.\
 ![sample_table](utils/analysis_1.PNG "Title")
 
-
+Please find some additional statistical analysis from the output file below.
+![sample_table](utils/analysis_2.PNG "Title")
 
 
 # Labour Division
