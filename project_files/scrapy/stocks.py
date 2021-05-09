@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+#importing necessary packages
 import scrapy
 import re
 
-
+#Creating a stock class, which we will use later for every scraped element. Specyfing what fields are we going to need.
 class Stock(scrapy.Item):
     name = scrapy.Field()
     short_name = scrapy.Field()
@@ -23,11 +24,12 @@ class Stock(scrapy.Item):
     ex_dividend_date = scrapy.Field()
     one_y_target_est = scrapy.Field()
 
-
+#Creating a spider to scrap data for each company using links that were scrapped before
 class LinksSpider(scrapy.Spider):
     name = 'stocks'
     allowed_domains = ['https://finance.yahoo.com/']
     custom_settings = {
+            'FEED_URI': 'stocks.csv',
             'FEED_FORMAT': 'csv',
             'FEED_EXPORT_FIELDS': [
                 "name",
@@ -51,19 +53,22 @@ class LinksSpider(scrapy.Spider):
             ],
          }
     try:
-        with open("link_lists.csv", "rt") as f:
+        with open("link_list.csv", "rt") as f:
             start_urls = [url.strip() for url in f.readlines()][1:]
     except:
         start_urls = []
-
+    # Callback function used to parse the response and return item objects (stock data)
     def parse(self, response):
         s = Stock()
+        #Using two diffrent xpaths because some information are located in span class and others are not
         temp = "//td[@class='Ta(end) Fw(600) Lh(14px)']/span/text()"
         temp_1 = "//td[@class='Ta(end) Fw(600) Lh(14px)']/text()"
         xpath_name = "//h1[@class='D(ib) Fz(18px)']/text()"
         check = response.xpath(temp).getall()[13]
         regex = re.compile('(.*)\s\((.*)\)')
         company_all = response.xpath(xpath_name).getall()[0]
+
+        #Assigning each field to the s object and yielding the object instance:
         s['name'], s['short_name'] = re.findall(regex, company_all)[0]
         s['previous_close'] = response.xpath(temp).getall()[0]
         s['open'] = response.xpath(temp).getall()[1]
