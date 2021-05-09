@@ -35,6 +35,12 @@ The extracted values are appended to already created lists, finally making up a 
 as column headers and the values as a column vector. The dataframe is exported to the ``csv`` file **stocks_bs.csv**. 
 
 ## Scrapy
+For the puropse of scraping Yahoo Finance web page, we also used Scrapy framework. The process could be divided into two parts: first - scraping the links for each of the "Most Active" companies and the second - scraping data for each of the companies.
+
+Links creation happens similarily to the Beautiful Soup and Selenium part of the project. The links are created by adding to a base link the ending specified for each company. To extract them, we used selectors, specifically Xpaths. 
+The scrapping happens with the use of spiders, first spider is created for the purpose of extracting the links and the second one to get the data dor each company. Spiders are basically a programs downloading the content of a given pages, they are using a parse function which is called when the URL is crawled and it includes the extraction logic. As not all the information about the companies could be extracted using the same xpath, we used two diffrent xpaths.
+
+The data in our project is stored in a csv files. This is specified by the FEED_FORMAT = 'csv'. What is important to note is that, to run the spiders, a USER_AGENT = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://google.com/bot.html)' has to be used.
 
 For the puropse of scraping Yahoo Finance web page, we also used Scrapy framework. The process could be divided into two parts: first - scraping the links for each of the "Most Active" companies and the second - scraping data for each of the companies.
 
